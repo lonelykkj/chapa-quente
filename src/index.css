@@ -1,0 +1,138 @@
+@import 'tailwindcss';
+
+/* ---------- Design tokens ---------- */
+@theme {
+  --color-bg: #0d0b09;
+  --color-panel: #17130f;
+  --color-panel-2: #211b15;
+  --color-line: #3a3026;
+  --color-brass: #d4a548;
+  --color-brass-hi: #f0c870;
+  --color-ember: #e2552b;
+  --color-fg: #efe6d6;
+  --color-muted: #a39886;
+  --color-whatsapp: #25d366;
+
+  --font-display: 'Big Shoulders Display', Impact, 'Arial Narrow', sans-serif;
+  --font-label: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-out-soft: cubic-bezier(0.2, 0.9, 0.3, 1);
+  --ease-spring: cubic-bezier(0.2, 1.6, 0.4, 1);
+  --ease-pop: cubic-bezier(0.2, 1.4, 0.4, 1);
+
+  --animate-marquee: marquee 26s linear infinite;
+  --animate-cue: cue 1.6s infinite;
+  --animate-ping-ring: ping-ring 1.8s infinite;
+  --animate-item-in: item-in 0.5s both;
+  --animate-thud: thud 0.22s ease-out;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes cue {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    80% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes ping-ring {
+    from {
+      transform: scale(0.4);
+      opacity: 1;
+    }
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  @keyframes item-in {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+  }
+  @keyframes thud {
+    40% {
+      transform: var(--bt) scaleY(0.965);
+    }
+  }
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* keep anchors clear of the fixed header */
+  }
+  body {
+    @apply bg-bg font-body text-fg overflow-x-hidden text-base/relaxed antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display m-0 leading-[0.9] font-black tracking-[0.01em] text-balance uppercase;
+  }
+  :focus-visible {
+    @apply outline-brass-hi outline-2 outline-offset-3;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+    }
+  }
+}
+
+/* ---------- Reusable utilities ---------- */
+@utility wrap {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+}
+
+@utility label {
+  font: 600 13px/1 var(--font-label);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+}
+
+@utility sec {
+  padding-block: clamp(80px, 12vw, 150px);
+}
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-fg);
+}
+
+/* Scroll reveal (toggled by useReveal) */
+@utility rv {
+  opacity: 0;
+  transform: translateY(50px);
+  &.in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.8s,
+      transform 1s var(--ease-out-soft);
+  }
+}
