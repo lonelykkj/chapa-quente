@@ -27,17 +27,20 @@ export const FACTS = [
   { value: 12, label: 'torneiras de chopp' },
 ]
 
-/** `days` uses Date#getDay(): 0 = domingo … 6 = sábado. */
+/**
+ * `days` uses Date#getDay(): 0 = domingo … 6 = sábado.
+ * `open`/`close` in hours; a `close` past 24 runs into the next day (26 = 02h).
+ */
 export const HOURS = [
-  { days: [1, 2, 3], label: 'Seg a qua', time: '18h – 23h' },
-  { days: [4], label: 'Quinta', time: '18h – 00h' },
-  { days: [5, 6], label: 'Sex e sáb', time: '12h – 02h' },
-  { days: [0], label: 'Domingo', time: '12h – 22h' },
+  { days: [1, 2, 3], label: 'Seg a qua', time: '18h – 23h', open: 18, close: 23 },
+  { days: [4], label: 'Quinta', time: '18h – 00h', open: 18, close: 24 },
+  { days: [5, 6], label: 'Sex e sáb', time: '12h – 02h', open: 12, close: 26 },
+  { days: [0], label: 'Domingo', time: '12h – 22h', open: 12, close: 22 },
 ]
 
 export const ADDRESS = {
-  street: 'Rua Augusta, 1450',
-  area: 'Consolação · São Paulo',
+  street: 'Consolação',
+  area: 'São Paulo · SP',
   phone: '(11) 3000-0000',
 }
 

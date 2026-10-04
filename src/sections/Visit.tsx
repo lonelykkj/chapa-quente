@@ -44,6 +44,20 @@ const CONTACTS = [
   },
 ]
 
+/** Current time in São Paulo, wherever the visitor is. */
+const nowInSaoPaulo = () => new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }))
+
+function isOpen(now: Date) {
+  const day = now.getDay()
+  const yesterday = (day + 6) % 7
+  const h = now.getHours() + now.getMinutes() / 60
+  return HOURS.some(
+    (row) =>
+      (row.days.includes(day) && h >= row.open && h < row.close) ||
+      (row.days.includes(yesterday) && h < row.close - 24),
+  )
+}
+
 /** Stylised street map; the route draws itself when scrolled into view. */
 function MapArt() {
   const { ref, visible } = useReveal<HTMLDivElement>()
@@ -89,7 +103,9 @@ function MapArt() {
 }
 
 export function Visit() {
-  const [today] = useState(() => new Date().getDay())
+  const [now] = useState(nowInSaoPaulo)
+  const today = now.getDay()
+  const open = isOpen(now)
 
   return (
     <section id="visite" className="sec relative pt-0!">
@@ -98,6 +114,15 @@ export function Visit() {
           <div className="flex flex-col gap-[22px] bg-panel p-[clamp(24px,4vw,44px)]">
             <span className="label">Visite</span>
             <h2 className="text-5xl">Balcão aberto</h2>
+            <span
+              className={cn(
+                'flex items-center gap-2 font-label text-sm/none font-bold tracking-[0.16em] uppercase',
+                open ? 'text-whatsapp' : 'text-muted',
+              )}
+            >
+              <i className="size-2 rounded-full bg-current" />
+              {open ? 'Aberto agora' : 'Fechado agora'}
+            </span>
 
             {CONTACTS.map(({ icon, title, text, href }) => {
               const Row = href ? 'a' : 'div'

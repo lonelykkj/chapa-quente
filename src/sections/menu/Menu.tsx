@@ -37,7 +37,7 @@ export function Menu() {
           <div
             role="tablist"
             aria-label="Categorias"
-            className="sticky top-[110px] flex flex-col gap-1 self-start max-[760px]:static max-[760px]:flex-row max-[760px]:gap-5 max-[760px]:overflow-x-auto"
+            className="sticky top-[110px] flex flex-col gap-1 self-start max-[760px]:static max-[760px]:flex-row max-[760px]:flex-wrap max-[760px]:gap-x-5 max-[760px]:gap-y-1"
           >
             {MENU.map((c, i) => {
               const selected = c.id === active

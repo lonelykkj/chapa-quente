@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Button } from '@/components/ui/Button'
+import { Button, ButtonLink } from '@/components/ui/Button'
 import { Price } from '@/components/ui/Price'
 import { useOrder } from '@/order/order'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -48,6 +48,11 @@ export function Hero() {
     let visible = true
 
     const readTarget = () => {
+      // reduced motion: show the burger already built, no scroll animation
+      if (reduce) {
+        target = 1
+        return
+      }
       const r = hero.getBoundingClientRect()
       target = clamp(-r.top / (r.height - window.innerHeight))
     }
@@ -116,7 +121,7 @@ export function Hero() {
   }, [reduce])
 
   return (
-    <section ref={heroRef} aria-label="Monte seu burger" className="relative h-[430vh]">
+    <section ref={heroRef} aria-label="Monte seu burger" className={cn('relative', reduce ? 'h-svh' : 'h-[430vh] max-[980px]:h-[220vh]')}>
       <div
         className={cn(
           'sticky top-0 grid h-svh items-center gap-6 overflow-hidden px-[clamp(16px,4vw,48px)] pt-[90px] pb-10',
@@ -144,6 +149,9 @@ export function Hero() {
             <i className="relative h-9 w-[22px] rounded-xl border-[1.5px] border-muted after:absolute after:top-[7px] after:left-1/2 after:-ml-[1.5px] after:h-[7px] after:w-[3px] after:animate-cue after:rounded-xs after:bg-brass" />
             Role para montar
           </div>
+          <ButtonLink href="#cardapio" className="self-start min-[981px]:hidden">
+            Ver cardápio
+          </ButtonLink>
         </div>
 
         {/* Burger */}
