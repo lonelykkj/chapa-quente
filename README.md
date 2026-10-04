@@ -1,42 +1,34 @@
 # Chapa Quente Burgers
 
-Landing page da Chapa Quente Burger Bar — React 19 + TypeScript + Tailwind CSS v4 (Vite).
+> Projeto criado para complementar o meu portfólio pessoal: **[portifolio-heitor.vercel.app](https://portifolio-heitor.vercel.app/)**
+>
+> A Chapa Quente é uma hamburgueria fictícia — nomes, telefones e endereço são só para demonstração.
 
-## Scripts
+Landing page de uma hamburgueria artesanal em São Paulo. O site apresenta a casa, o cardápio e a forma de pedir,
+e deixa o cliente montar o pedido direto na página e enviá-lo pelo WhatsApp.
 
-```bash
-npm install
-npm run dev      # servidor de desenvolvimento
-npm run build    # type-check + build de produção
-npm run lint     # oxlint
-npm run preview  # serve o build
-```
+![Hero da Chapa Quente](docs/hero.png)
 
-## Estrutura
+## O que tem no site
 
-```
-src/
-├── assets/burger/      # camadas do hambúrguer (webp recortados da foto)
-├── components/
-│   ├── burger/         # sprite SVG <defs> com as camadas
-│   ├── layout/         # Header, Footer
-│   ├── order/          # sacola: botões de quantidade, barra flutuante, gaveta de pedido
-│   └── ui/             # Button, Badge, Price, SectionHead, Reveal, WhatsAppIcon
-├── data/               # conteúdo: cardápio, horários, contatos
-├── hooks/              # useReveal, useReducedMotion
-├── lib/                # utils (cn, easing, formatBRL) e whatsapp (link + mensagem)
-├── order/              # estado da sacola (useOrder) e OrderProvider
-├── sections/           # Hero, Marquee, About, Menu, HowToOrder, Feed, Visit, Newsletter
-├── App.tsx
-├── index.css           # tokens do tema (@theme), base e utilitários
-└── main.tsx
-```
+- **Hambúrguer que se monta na rolagem** — no topo, o Chapa Clássico é montado camada por camada conforme a página desce.
+- **Cardápio com sacola** — burgers, porções, bebidas e sobremesas; o cliente adiciona os itens e a sacola fica salva no navegador.
+- **Pedido pelo WhatsApp** — a sacola vira uma mensagem formatada e abre direto a conversa com a loja.
+- **Horário de funcionamento ao vivo** — o site mostra se o balcão está aberto agora, junto com endereço e mapa.
+- **Responsivo** — pensado para funcionar bem no celular, onde a maioria dos pedidos acontece.
 
-Imports usam o alias `@/` → `src/`. Cores, fontes, easings e animações ficam como tokens em `src/index.css`
-(`bg-brass`, `font-display`, `animate-marquee`, …).
+![Cardápio](docs/cardapio.png)
 
-## Pedidos pelo WhatsApp
+![Seção de visita com horários e mapa](docs/visite.png)
 
-O cliente monta a sacola no cardápio e envia o pedido formatado para o WhatsApp da loja.
-O número fica em `src/data/site.ts` → `WHATSAPP` (`number` só com dígitos, com 55 + DDD).
-A sacola fica salva no navegador (localStorage) e a mensagem é montada em `src/lib/whatsapp.ts`.
+<p align="center">
+  <img src="docs/mobile.png" alt="Versão mobile" width="320" />
+</p>
+
+## Tecnologias
+
+React 19, TypeScript, Tailwind CSS v4 e Vite.
+
+## Acesse o site
+
+**[chapa-quente-six.vercel.app](https://chapa-quente-six.vercel.app/)**
